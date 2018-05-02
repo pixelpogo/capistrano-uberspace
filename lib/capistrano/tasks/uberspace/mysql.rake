@@ -18,7 +18,7 @@ namespace :uberspace do
 
     task :setup_database_and_config do
       on roles fetch(:uberspace_roles) do
-        my_cnf = capture('cat #{uberspace_home}/.my.cnf')
+        my_cnf = capture("cat #{uberspace_home}/.my.cnf")
         my_sql_config = IniFile.new(content: my_cnf)['client']
         config = {}
         stages.each do |env|
