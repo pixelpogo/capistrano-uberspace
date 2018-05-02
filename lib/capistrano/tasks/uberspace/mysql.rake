@@ -25,7 +25,7 @@ namespace :uberspace do
           config[env] = {
             'adapter' => 'mysql2',
             'encoding' => 'utf8',
-            'database' => "#{fetch :user}_rails_#{fetch :application}_#{env}",
+            'database' => "#{fetch :user}_rails_#{fetch :application.delete('-')}_#{env}",
             'host' => 'localhost'
           }
 
