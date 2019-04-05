@@ -23,10 +23,12 @@ namespace :uberspace do
         config = {}
         stages.each do |env|
           config[env] = {
-            'adapter' => 'mysql2',
-            'encoding' => 'utf8',
-            'database' => "#{fetch :user}_rails_#{fetch :application.delete('-')}_#{env}",
-            'host' => 'localhost'
+            'adapter'   => 'mysql2',
+            'encoding'  => 'utf8mb4',
+            'charset'   => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'database'  => "#{fetch :user}_rails_#{fetch :application.delete('-')}_#{env}",
+            'host'      => 'localhost'
           }
 
           config[env]['username'] = my_sql_config['user']
