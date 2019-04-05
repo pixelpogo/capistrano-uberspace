@@ -68,19 +68,19 @@ end
 namespace :deploy do
   task :start do
     on roles fetch(:uberspace_roles) do
-      execute "svc -u #{uberspace_home}/service/rails-#{fetch :application}"
+      execute "supervisorctl start #{fetch :application}-daemon"
     end
   end
 
   task :stop do
     on roles fetch(:uberspace_roles) do
-      execute "svc -d #{uberspace_home}/service/rails-#{fetch :application}"
+      execute "supervisorctl stop #{fetch :application}-daemon"
     end
   end
 
   task :restart do
     on roles fetch(:uberspace_roles) do
-      execute "svc -du #{uberspace_home}/service/rails-#{fetch :application}"
+      execute "supervisorctl restart #{fetch :application}-daemon"
     end
   end
   after :publishing, :'deploy:restart'
@@ -88,7 +88,7 @@ namespace :deploy do
   desc "Displays status information of the application."
   task :status do
     on roles fetch(:uberspace_roles) do
-      execute "svstat #{uberspace_home}/service/rails-#{fetch :application}"
+      execute "supervisorctl status #{fetch :application}-daemon"
     end
   end
 end
