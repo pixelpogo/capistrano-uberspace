@@ -49,14 +49,6 @@ umask = 077
   end
   after :'uberspace:setup_gemrc', :'uberspace:install_bundler'
 
-  task :setup_svscan do
-    on roles fetch(:uberspace_roles) do
-      execute 'test -d ~/service || uberspace-setup-svscan; echo 0'
-    end
-  end
-  after :'uberspace:check', :'uberspace:setup_svscan'
-
-
   task :setup_secrets do
     on roles fetch(:uberspace_roles) do
       secrets = <<-EOF
@@ -71,7 +63,6 @@ umask = 077
     end
   end
   after :'uberspace:check', :'uberspace:setup_secrets'
-
 end
 
 namespace :deploy do
