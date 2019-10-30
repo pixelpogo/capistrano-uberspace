@@ -26,8 +26,9 @@ namespace :uberspace do
       daemon_script = <<-EOF
 #!/bin/bash
 export HOME=#{uberspace_home}
+source $HOME/.credentials
       #{fetch(:uberspace_env_variables).map do |k,v|
-        "export #{k}=#{v}"
+      "export #{k}=#{v}"
       end.join("/n")}
 cd #{fetch :deploy_to}/current
 #{start_server_command}
